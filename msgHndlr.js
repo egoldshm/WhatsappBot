@@ -6,6 +6,7 @@ const moment = require('moment-timezone')
 var colors = require('colors');
 const { exec } = require('child_process')
 const { stdout } = require('process')
+var validUrl = require('valid-url');
 
 moment.tz.setDefault('Europe/Rome').locale('id')
 
@@ -23,27 +24,46 @@ module.exports = msgHandler = async (client, message) => {
         const uaOverride = 'WhatsApp/2.2029.4 Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36'
 		if (isMedia && type === 'image') {
 			console.log(moment().format("H:mm:ss").green+" Sticker "+message.from);
-			client.reply(from, 'Attendi il tuo sticker fresco fresco sta per arrivare', id)
+			client.reply(from, 'חכה בסבלנות למדבקה המגניבה שלך! היא בדרך!', id)
 			const mediaData = await decryptMedia(message, uaOverride)
-			console.log(moment().format("H:mm:ss").green+" decripto la foto "+message.from);
+			console.log(moment().format("H:mm:ss").green+" רק רגע, אני מפענח את התצלום "+message.from);
 			const imageBase64 = `data:${mimetype};base64,${mediaData.toString('base64')}`
 			await client.sendImageAsSticker(from, imageBase64)
-			console.log(moment().format("H:mm:ss").green+" sticker inviato "+message.from);
+			console.log(moment().format("H:mm:ss").green+" מדבקה נשלחה "+message.from);
 		}
 		if (isMedia &&(mimetype === 'video/mp4' && message.duration < 10 || mimetype === 'image/gif' && message.duration < 10)) {
 			const mediaData = await decryptMedia(message, uaOverride)
-			console.log(moment().format("H:mm:ss").green+" Sticker Animato "+message.from);
-			client.reply(from, 'Attendi il tuo sticker fresco fresco sta per arrivare', id)
+			console.log(moment().format("H:mm:ss").green+" מדבקה נשלחה "+message.from);
+			client.reply(from, 'חכה בסבלנות למדבקה המגניבה שלך! היא בדרך!', id)
 			const filename = `./media/input.${mimetype.split('/')[1]}`
-			console.log(moment().format("H:mm:ss").green+" decripto il video "+message.from);
+			console.log(moment().format("H:mm:ss").green+" מפענח את הסרטון "+message.from);
 			await fs.writeFileSync(filename, mediaData)
-			console.log(moment().format("H:mm:ss").green+" video salvato "+message.from);
+			console.log(moment().format("H:mm:ss").green+" וידאו נשמר "+message.from);
 			await exec(`gify ${filename} ./media/output.gif --fps=30 --scale=240:240`, async function (error, stdout, stderr) {
-				console.log(moment().format("H:mm:ss").green+" video convertito in gif "+message.from);
+				console.log(moment().format("H:mm:ss").green+" וידאו מומר לגיף "+message.from);
 				const gif = await fs.readFileSync('./media/output.gif', { encoding: "base64" })
 				await client.sendImageAsSticker(from, `data:image/gif;base64,${gif.toString('base64')}`)
-				console.log(moment().format("H:mm:ss").green+" sticker inviato "+message.from);
+				console.log(moment().format("H:mm:ss").green+" סטיקר נשלח "+message.from);
 			})//
+		}
+		if(body.includes("צרף"))
+		{
+			let answer = await client.createGroup("קבוצה חדשה עם הבוט 🤩",message.from)
+			client.setGroupDescription(answer.gid, `קבוצה חדשה של הבוט עם ${name + " "+ formattedTitle}` )
+			client.sendText(answer.gid, JSON.stringify(answer))
+		}
+		if(validUrl.isUri(body))
+		{
+			console.log(moment().format("H:mm:ss").green + " Recvied Url!")
+			await client.sendText(message.from, "רק רגע, הקובץ שלך בדרך...")
+			let items = body.split("/")
+			console.log(items[items.length - 1])
+			client.sendFileFromUrl(message.from, body,decodeURIComponent(items[items.length - 1]), "הנה הקובץ שלך!").then((serialized) => {
+				console.log(`sendFileFromUrl has serialized ${serialized}\n`);
+			}, (err) => {
+				console.log(`sendFileFromUrl has error ${err}\n`);
+			});
+
 		}
 		if(command == '!guida' || command == "!help"){
 			console.log(moment().format("H:m:ss").green+": Guida "+message.from);
@@ -54,29 +74,8 @@ module.exports = msgHandler = async (client, message) => {
 			client.sendText(message.from,"Da oggi puoi anche inviare un video/gif ed esso diventerà uno sticker animato");
 
 		}
-		if(command === "!Creator"){
-			console.log(moment().format("H:m:ss").green+": Creator "+message.from);
-			client.sendText(message.from,"https://www.instagram.com/whataboutclaxl/ \n\n\n https://github.com/Claxl \n\n\nContattami per qualsiasi problema sul bot, se vuoi contribuire alla sua crescita");
-		}
-		if(body.includes("media")){
-			console.log(moment().format("H:mm:ss").green+" giphy "+message.from);
-			if(!isNaN(body.charAt(13))){
-				console.log(moment().format("H:mm:ss").green+" link con numero, tolgo il numero "+message.from);
-				withNoDigits = body.replace(/\d+/,"");
-				console.log(moment().format("H:mm:ss").green+withNoDigits);
-				console.log(moment().format("H:mm:ss").green+" numero tolto "+message.from);
-			}else{
-				console.log(moment().format("H:mm:ss").green+" nessun numero "+message.from);
-				withNoDigits = body;
-				console.log(moment().format("H:mm:ss").green+withNoDigits);
-				console.log(moment().format("H:mm:ss").green+" link"+message.from);
-			}
-			client.sendGiphyAsSticker(message.from,withNoDigits);
-			client.sendText(message.from,"Tutto ok! Attendi un attimo");
-			console.log(moment().format("H:mm:ss").green+" sticker inviato "+message.from);
-		}
     } catch (err) {
-        console.log("errore".red)
+        console.log("error".red + " " + err)
         //client.kill().then(a => console.log(a))
     }
 }
