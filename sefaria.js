@@ -82,8 +82,4 @@ async function search_in_sefaria(text, error, answer)
   req.end()
 
 }
-search_in_sefaria("משה קיבל תורה מסיני", (error)=>console.log("ERROR:" + error), (res)=>
-{
-  console.log(res)
-})
 module.exports = {get_calendars_data: get_calendars_data, search_name_sefaria:search_name_sefaria}

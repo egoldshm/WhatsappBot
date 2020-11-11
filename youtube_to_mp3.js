@@ -1,6 +1,6 @@
 var YoutubeMp3Downloader = require("youtube-mp3-downloader");
 
-module.exports = youtube_mp4_downloader = async (url, func) => {
+module.exports = youtube_mp3_downloader = async (url, func) => {
     if (url.includes("youtube.com/watch?v")) {
         var video_id = url.split('v=')[1];
         var ampersandPosition = video_id.indexOf('&');
@@ -31,7 +31,3 @@ module.exports = youtube_mp4_downloader = async (url, func) => {
         console.log(JSON.stringify(progress));
     });
 }
-
-youtube_mp4_downloader("https://www.youtube.com/watch?v=j5GCzFWWR9g", (err, data) => {
-    console.log(JSON.stringify(data));
-})
