@@ -39,3 +39,4 @@
 [1110/233552.551:ERROR:crash_report_exception_handler.cc(99)] PrepareNewCrashReport failed
 [1110/235154.074:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
 [1111/124405.277:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1111/150551.325:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
