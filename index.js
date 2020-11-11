@@ -3,6 +3,7 @@ const msgHandler = require('./msgHndlr')
 const rowAppender = require('./fileHandler')
 const options = require('./options')
 const moment = require('moment-timezone')
+console.log("Start run code 'index.js'")
 const start = async (client = new Client()) => {
         console.log('[SERVER] Server Started!')
         // Force it to keep the current session
