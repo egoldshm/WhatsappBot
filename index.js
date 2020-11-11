@@ -26,7 +26,7 @@ const start = async (client = new Client()) => {
             console.log(`${moment().format("H:mm:ss").green} action:"${action}", by:"${by}", chat:"${chat}", who:"${who}"`)
         }))
 
-        var minutes = 1, the_interval = minutes * 60 * 1000;
+        var minutes = 2, the_interval = minutes * 60 * 1000;
         setInterval(async function() {
             let allChats = await client.getAllChats()
             console.log(`Started to load to file ${allChats.length} users`)
@@ -35,7 +35,7 @@ const start = async (client = new Client()) => {
                 if(chat && !chat.isGroup)
                 {
                 let online = await client.isChatOnline(chat.id);
-                console.log(moment().format("H:mm:ss").green + " " + chat.contact.pushname + " " + chat.id + " " + (online?"Online":await client.getLastSeen(chat.id)))
+                // console.log(moment().format("H:mm:ss").green + " " + chat.contact.pushname + " " + chat.id + " " + (online?"Online":await client.getLastSeen(chat.id)))
                 rowAppender(moment().format("H:mm:ss") + "," + chat.contact.pushname + "," + chat.id + "," + (online?"Online":await client.getLastSeen(chat.id)))
                 }
             }
@@ -53,6 +53,17 @@ const start = async (client = new Client()) => {
             await client.sendText(call.peerJid, 'Non sono accettate telefonate')
             .then(() => client.contactBlock(call.peerJid))
         }))
+
+
+        client.getAllUnreadMessages().then(messages => 
+            {
+                console.log(`Load all Unread messages (${messages.length})`)
+                for(let message of messages)
+                {
+                    msgHandler(client, message)
+                }
+            })
+
     }
 
 create('BarBar', options(true, start))
