@@ -76,11 +76,11 @@ module.exports = msgHandler = async (client, message) => {
 
 		//אם זה נראה כמו לינק - אבל לא עבר את הבדיקה הקודמת
 		else if (body.split(".").length > 1 && body.split(" ").length == 1) {
-			await client.sendText(message.from, "רגע, התכוונת לשלוח לי לינק? תשלח בבקשה עם http:// או https:// בתחילת הלינק - כדי שאזהה אותו כלינק...")
+			await client.sendText(message.from, constants.NO_VALID_LINK)
 
 		}
 
-		if (body.includes("היום")) {
+		if (body.includes(constants.TODAY_ASK)) {
 			get_calendars_data(error => {
 				throw ("ERROR in get_calendars_data " + error)
 			}, (result) => {
