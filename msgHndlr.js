@@ -123,7 +123,7 @@ module.exports = msgHandler = async (client, message) => {
 		if (body.includes(constants.SEFARIA_TEXT)) {
 			const string_to_search = body.replace(constants.SEFARIA_TEXT, "").replace("\n", "").trim()
 			search_in_sefaria(string_to_search, error => {
-				throw ("לא הצלחתי למצוא את מה שחיפשת 😞 \n" + error)
+				client.sendText(message.from, "לא הצלחתי למצוא את מה שחיפשת, תנסה לחפש במילים אחרות. 😞 \n זה השגיאה שקיבלתי 👇 \n" + error)
 			},
 			(result) =>
 			{

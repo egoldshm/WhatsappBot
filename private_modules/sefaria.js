@@ -20,8 +20,14 @@ async function get_calendars_data(error, answer) {
     let rawData = '';
     res.on('data', (chunk) => { rawData += chunk; });
     res.on('end', () => {
+      try
+      {
       const result = JSON.parse(rawData)
       answer(result)
+      }
+      catch(err)
+      {error(err)}    
+
     })
   })
   req.on('error', error)
@@ -50,8 +56,13 @@ async function search_name_sefaria(name, error, answer) {
     let rawData = '';
     res.on('data', (chunk) => { rawData += chunk; });
     res.on('end', () => {
+      try
+      {
       const result = JSON.parse(rawData)
       answer(result)
+      }
+      catch(err)
+      { error(err)}
     })
   })
   req.on('error', error)
@@ -84,8 +95,13 @@ async function search_in_sefaria(text, error, answer) {
         let rawData = '';
         res.on('data', (chunk) => { rawData += chunk; });
         res.on('end', () => {
+          try
+          {
           const result = JSON.parse(rawData)
           answer(result)
+          }
+          catch(err)
+          {error(err)}    
         })
       })
       req1.on('error', error)
@@ -97,8 +113,12 @@ async function search_in_sefaria(text, error, answer) {
       let rawData = '';
       res.on('data', (chunk) => { rawData += chunk; });
       res.on('end', () => {
+        try
+        {
         const result = JSON.parse(rawData)
-        answer(result)
+        answer(result)}
+        catch(err)
+        {error(err)}    
 
       })
     }
