@@ -22,7 +22,7 @@ node index.js
 ## שימוש
 בשביל להשתמש בבוט צריך לשלוח "תפריט" או "עזרה" ולהשתמש בפקודות
 ### רשימת האפשרויות בבוט כרגע
-<p style='direction:rtl; text-align: right'>
+<div dir="rtl">
 <br/>🌟 שלח לי תמונה, סרטון או גיף - ואני אשלח לך בחזרה סטיקר, שלח לי סטיקר - ואני אחזיר לך אותו כתמונה
 <br/>🌟 שלח לי 'ספריא' עם שם של ספר ועמוד ואני אשלח לך את הטקסט שיתאים לבקשה שלך (לדוגמה תשלח 'ספריא בבא מציעא ד ע"א' או "ספריא שמות ב ג" וכד')
 <br/>🌟 שלח לי לינק לקובץ באינטרנט (או סתם אפילו דף html) - והוא אשלח לך אותו כקובץ
@@ -30,7 +30,7 @@ node index.js
 <br/>🌟 שלח לי 'היום' ואני אשלח לך לינקים ומידע על כל הסדרים של הלימוד היומי שיש היום מאתר ספריא
 <br/>🌟 שלח לי 'ספר' עם שם של ספר ואני אשלח לך לינקים לכל הספרים הרלוונטים שיש בספריא שעונים על מה שביקשת (לדוגמה תשלח 'ספר משנה תורה')
 <br/>🌟 שלח לי שם של שיר או סרטון ו'ביוטיוב' ואני אשלח לך את התוצאות של החיפוש שלך ביוטיוב.
-</p>
+</div>
 
 ## תודה וקרדיטים
 [Whatsapp Library](https://github.com/open-wa/wa-automate-nodejs)
