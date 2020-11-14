@@ -1,4 +1,5 @@
 <div dir="rtl">
+
 # ווצאפ-בוט
 בוט חביב מאוד בווצאפ, שמאפשר דברים מגניבים כגון - הפיכת סטיקר חזרה לתמונה, הפיכת תמונה וסרטון לסטיקר, חיפוש ביוטיוב וספריא, הורדת סרטונים מיוטיוב, חיפוש ספרים וטקסטים מספריא, והורדת דפי אינטרנט
 
@@ -7,6 +8,9 @@
 - A phone with whatsapp
 
 ## איך להפעיל
+
+<div dir="ltr">
+
 - Download the repository, via git or via zip
 - Enter key for youtube in the file "youtube_search.js" (in "youtube_modules") from [here](https://developers.google.com/youtube/v3/getting-started)
 
@@ -20,6 +24,9 @@ npm install gify-cli -g
 ```bash
 node index.js
 ```
+
+</div>
+
 ## שימוש
 בשביל להשתמש בבוט צריך לשלוח "תפריט" או "עזרה" ולהשתמש בפקודות
 ### רשימת האפשרויות בבוט כרגע
