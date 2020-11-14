@@ -1,7 +1,7 @@
 {
-  "name": "stickerbot",
+  "name": "whatsapp_cool_bot",
   "version": "1.0.0",
-  "description": "This is a simple script that allows you to do sticker and animated sticker",
+  "description": "nodejs code for whatsapp-bot with stickers, youtube and sefaria downloads and searching",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -14,7 +14,7 @@
     "url": "git+https://github.com/Claxl/StickerBot.git"
   },
   "keywords": [
-    "sticker-bot",
+    "whatsapp_cool_bot",
     "whatsapp"
   ],
   "author": "",

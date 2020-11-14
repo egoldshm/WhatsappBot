@@ -1,3 +1,5 @@
+/// לא תקין - בעיה עם ספריה שצריך להתקין במחשב - אפשר לקרוא בתחילת העמוד של הספריה הזו
+
 var YoutubeMp3Downloader = require("youtube-mp3-downloader");
 
 module.exports = youtube_mp3_downloader = async (url, func) => {

@@ -1,8 +1,10 @@
+const colors = require('colors');
 const { create, Client } = require('@open-wa/wa-automate')
 const msgHandler = require('./msgHndlr')
-const rowAppender = require('./fileHandler')
 const options = require('./options')
-const moment = require('moment-timezone')
+const moment = require('moment-timezone');
+const { on } = require('process');
+const { register_info_about_users } = require("./register_info_about_users/register_info_about_users");
 console.log("Start run code 'index.js'")
 const start = async (client = new Client()) => {
         console.log('[SERVER] Server Started!')
@@ -27,21 +29,8 @@ const start = async (client = new Client()) => {
             console.log(`${moment().format("H:mm:ss").green} action:"${action}", by:"${by}", chat:"${chat}", who:"${who}"`)
         }))
 
-        var minutes = 2, the_interval = minutes * 60 * 1000;
-        setInterval(async function() {
-            let allChats = await client.getAllChats()
-            console.log(`Started to load to file ${allChats.length} users`)
-            for(let chat of allChats)
-            {
-                if(chat && !chat.isGroup)
-                {
-                let online = await client.isChatOnline(chat.id);
-                // console.log(moment().format("H:mm:ss").green + " " + chat.contact.pushname + " " + chat.id + " " + (online?"Online":await client.getLastSeen(chat.id)))
-                rowAppender(moment().format("H:mm:ss") + "," + chat.contact.pushname + "," + chat.id + "," + (online?"Online":await client.getLastSeen(chat.id)))
-                }
-            }
-            // do your stuff here
-        }, the_interval);
+        //כל כמה דקות - מוסיף לקובץ מידע על הזמינות של המשתמשים
+        register_info_about_users(client);
 
         
         client.onAddedToGroup(((chat) => {
@@ -51,11 +40,11 @@ const start = async (client = new Client()) => {
 
         // listening on Incoming Call
         client.onIncomingCall(( async (call) => {
-            await client.sendText(call.peerJid, 'Non sono accettate telefonate')
+            await client.sendText(call.peerJid, 'נא לא להתקשר אלי 📞 נחסמת 😱')
             .then(() => client.contactBlock(call.peerJid))
         }))
 
-
+        // עובר בתחילת ההרצה על כל ההודעות הישנות שלא נקראו - ומטפל בהם
         client.getAllUnreadMessages().then(messages => 
             {
                 console.log(`Load all Unread messages (${messages.length})`)
@@ -69,4 +58,6 @@ const start = async (client = new Client()) => {
 
 create('BarBar', options(true, start))
     .then(client => start(client))
-    .catch((error) => console.log(error))
+    .catch((error) => console.log("ERROR in barBar ".red + error)).catch((error) => console.log("ERROR in index.js ".red + error))
+
+

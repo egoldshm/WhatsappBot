@@ -1,36 +1,27 @@
-# StickerBot
-
-This is a simple script that allows you to do sticker and animated sticker
-
-## What's needed
+# ווצאפ-בוט
+בוט חביב מאוד בווצאפ, שמאפשר דברים מגניבים כגון - הפיכת סטיקר חזרה לתמונה, הפיכת תמונה וסרטון לסטיקר, חיפוש ביוטיוב וספריא, הורדת סרטונים מיוטיוב, חיפוש ספרים וטקסטים מספריא, והורדת דפי אינטרנט
+## מה צריך בשביל להתקין ולהשתמש
 - NodeJS
-- A phone with whatsapp (preferred not yours first one)
-## How to proceed
+- A phone with whatsapp
+- 
+## איך להפעיל
 - Download the repository, via git or via zip
 - Use command
 ```bash
 npm i
 npm install gify-cli -g
 ```
+
 - After the install of the module, start the bot with command
 ```bash
 node index.js
 ```
-## Usage
-For animated sticker there are two ways, the first one by sending video/gif. The second one is by sending giphy link like these one :
-```bash
-https://media0.giphy.com/media/kf9dfB18XB6JGM8J7s/giphy.gif?cid=ecf05e47c7c351f68736abdbfd4210ca56a2a9fd5323e60c&rid=giphy.gif
-```
-For non animated sticker, just send the photo
-## Contributing
+## שימוש
+בשביל להשתמש בבוט צריך לשלוח "תפריט" או "עזרה" ולהשתמש בפקודות
 
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
-
-## Thanks goes to
+##תודה וקרדיטים ל
 [Whatsapp Library](https://github.com/open-wa/wa-automate-nodejs)
 
-[Animated Sticker Inspiration](https://github.com/MhankBarBar/whatsapp-bot)
+[sticker bot](https://github.com/Claxl/StickerBot)
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
